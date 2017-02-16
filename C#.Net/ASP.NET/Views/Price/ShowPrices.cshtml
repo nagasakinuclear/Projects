@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "ShowPrices";
+    Layout = "~/Views/Service/MasterView.cshtml";
+}
+<link href="/Content/css/Price.css" rel="stylesheet">
+<div class="discont-text text-center">
+    <h3>Лучшие цены в Киеве: </h3>
+</div>
+<div class="slider">
+    <div class="price-info">
+
+        <table id="Price_table">
+            <tbody>
+
+                @foreach (var item in ViewBag.Service)
+                {
+                    int Price = @Convert.ToInt32(item.Price);
+                    <tr>
+                        <td><p><b>@item.Name</b></p></td>
+                        <td><p>@Price грн.</p></td>
+                        <td class="checkboxes"><input type="checkbox" value="@Price" onclick="calc(this)"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="Result">
+            Итоговая стоимость:
+            <div id="FinalResult"></div>
+            грн.
+        </div>
+    </div>
+    <br>
+    <h4 class="Option_info">Предварительно просим связаться с нами или оставить заявку.</h4>
+</div>
+<script async src="~/Scripts/calculate_price.js"></script>

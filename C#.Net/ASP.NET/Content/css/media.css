@@ -1,0 +1,122 @@
+﻿@media only screen and (max-width : 4000px) {
+    #main .content_menu .container .row .col-sm-7 .slider .price-info #Price_table .checkboxes{
+        text-align:center;
+    }
+    #main .content_menu .container .row .col-sm-7 .slider .price-info .Result {
+        text-align: right;
+        width: 100%;
+        position: relative;
+        border: 1px solid #E2E9F0;
+        display: block;
+        padding: 20px;
+        color:#336699;
+        margin-left:30px;
+        margin-top:-10px;
+    }
+    #main .content_menu .container .row .col-sm-7 .slider .price-info .Result #FinalResult
+    {
+        padding-right: 7px;
+        padding-left: 7px;  
+        display: inline;   
+        color:red; 
+    }
+    .header-modal .form_input_description{
+        margin-bottom:8px;
+    }
+    footer .container .raw .col-md-5{
+        border-left: 1px dashed #ccc;
+        border-right: 1px dashed #ccc;
+    }
+}
+@media only screen and (max-width : 1200px) {
+      #main .content_menu .container .slider .about_company img{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+      .carousel-caption h3{
+       font-size:18px;
+   }
+}
+
+@media only screen and (max-width : 991px) {
+#main button#show_schedule
+    {
+        margin-left:0px !important;
+    }
+    footer .container .raw .col-md-3, footer .container .raw .col-md-4,footer .container .raw .col-md-5
+    {
+        border:none !important;
+    }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 800px) {
+       #main .content_menu .container .row .col-sm-7 .slider .price-info table#Price_table{
+        margin-left:0px !important;
+    }
+       #main .content_menu .container .row .col-sm-7 .slider .price-info .Result{
+           margin-left:0px;
+       }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 600px) {
+    ul#responsive-menu.list-inline h4 {
+        padding: 20px 34px;
+    }
+    #main .content_menu nav.right-nav .navigation ul{
+        padding:0px !important;
+    }
+}
+@media only screen and (max-width : 583px) {
+    ul#responsive-menu.list-inline h4 {
+        padding: 20px 25px;
+    }
+}
+@media only screen and (max-width : 515px) {
+    #main button#show_schedule
+    {
+        margin-left:0px !important;
+    }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 511px) {
+    ul#responsive-menu.list-inline h4 {
+        padding: 20px 16px;
+        font-size:16px;
+    }
+}
+@media only screen and (max-width : 439px) {
+    ul#responsive-menu.list-inline h4 {
+        padding: 20px 9px;
+        font-size:16px;
+    }
+}/* Custom, iPhone Retina */
+ @media only screen and (max-width : 386px) {
+   .carousel-caption h3{
+       font-size:18px;
+   }
+}
+
+@media only screen and (max-width : 369px) {
+     ul#responsive-menu.list-inline h4 {
+        padding: 20px 3px;
+        font-size:14px;
+    }
+}
+@media only screen and (max-width : 321px) {
+     ul#responsive-menu.list-inline h4 {
+         font-size:13px;
+        padding: 20px 3px;
+    }
+}
+@media only screen and (max-width : 288px) {
+     ul#responsive-menu.list-inline h4 {
+         font-size:12px;
+        padding: 20px 1px;
+    }
+}
+
+
+
+
+

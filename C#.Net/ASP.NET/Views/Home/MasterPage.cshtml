@@ -1,0 +1,239 @@
+﻿@model DOC.Models.Orders
+<!DOCTYPE html>
+@{
+    ViewBag.Title = "MasterView";
+}
+
+<html lang="ru">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="/Content/css/style.css" rel="stylesheet">
+    <link rel="Stylesheet" href="~/Content/css/media.css" type="text/css" />
+</head>
+<body>
+    <header>
+        <!--BEGIN OF NAV-->
+        <div class="nav">
+            <div class="container">
+                <div class="row">
+                    <ul class="list-inline" id="responsive-menu">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")"><h4>Главная</h4></a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("About", "Service")"><h4>О нас</h4></a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("ShowPrices", "Price")"><h4>Цены</h4></a>
+                        </li>
+
+                        <li id="main-nav">
+                            <a href="#contacts"><h4>Контакты</h4></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--END OF NAV-->
+    </header>
+    <!--Begin Of MAIN-->
+
+    <section id="main">
+        <div class="main info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h3>УЗИ диагностика и консултация гастроэнтеролога</h3>
+                        <h3>по самым доступным ценам и высоким качествам</h3>
+                    </div>
+                    <div class="col-sm-4 contact_info">
+                        <a href="tel:380963218888">
+                            <h3>  +38 (096) 321-88-88 </h3>
+                        </a>
+
+                        <h5>
+                            <span id="consult_schedule">
+                                Консультация с 9<sup>00</sup> до 14<sup>00</sup>
+                                <br>
+                                с понедельника по пятницу
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END OF MAIN-->
+        <!--BEGIN OF CONTENT_MENU-->
+        <div class="content_menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <!---------------------RENDER BODY------------------->
+                        @RenderBody()
+                        <!---------------------RENDER BODY------------------->
+                        <button data-toggle="modal" href="#make_offer_modal" id="make_offer">расписание</button>
+                        <button data-toggle="modal" href="#show_schedule_modal" id="show_schedule">Оставить заявку</button>
+                        <!--END OF col-sm-7-->
+                    </div>
+                    <!--Begin OF right-Navigation-->
+                    <nav class="right-nav">
+                        <div class="col-sm-5 navigation">
+                            @{Html.RenderAction("GetList", "Home");}
+                        </div>
+                    </nav>
+                    <!--END OF right-Navigation-->
+                </div>
+                <!--END OF CONTENT_MENU-->
+            </div>
+        </div>
+    </section>
+    <div class="free_space">
+        <div class="container">
+            <div class="raw">
+                <br>
+            </div>
+        </div>
+    </div>
+    <section id="contact-holder">
+        <!--BEGIN OF map_capture-->
+        <div class="map_capture">
+            <div class="container">
+                <div class="raw">
+                    <div class="col-sm-5">
+                        <div class="map" style="width: 580px;height: 309px;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2537.5638891982935!2d30.42972331579235!3d50.50507397948301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cd7a566a1661%3A0xe46d0d9df545bfb9!2z0L_RgNC-0YHQv9C10LrRgiDQn9GA0LDQstC00LgsIDY00JAsINCa0LjRl9Cy!5e0!3m2!1sru!2sua!4v1476561418319"
+                                    width="571" height="299" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div id="contacts">
+                            <h4>Мы находимся по адресу: </h4>
+                            <h5>
+                                проспект Правды, 64А.
+                            </h5>
+                            <h5>Детская поликлиника №2, на первом этаже.</h5>
+                            <h4>Контактные номера телефонов:</h4>
+                            <br>
+                            <a href="tel:380963218888">38 (096) 321-88-88</a>
+                            <br>
+                            <a href="tel:380967628888">38 (096) 762-88-88</a>
+                            <br>
+                            <a href="tel:380958832828">38 (095) 883-28-28</a>
+                            <div class="doc-name">Юлия Владимировна</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END OF map_capture-->
+    </section>
+    <div class="free_space">
+        <div class="container">
+            <div class="raw">
+                <BR>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="raw">
+                <div class="col-md-3">
+                    <h5>© Кабинет УЗИ </h5>
+                    <h5>Качественный сервис по самым низким ценам!</h5>
+                    <br />
+                    <br />
+
+                </div>
+                <div class="col-md-5">
+                    <h5><b>Using ASP.NET MVC 5</b></h5>
+                    <h5>MS SQL 2016</h5>
+                    <h5>Web hosting by <b>smarterasp.net</b></h5>
+                    <br>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-info">
+
+                        <h5><strong>Copyright © 2015-2016</strong></h5>
+                        <h6>Авторские права защищены в соответствии с Законом "Об авторском праве и смежных правах" </h6>
+                        <h6>Использование материалов и элементов дизайна в интернете и печатных изданиях запрещено!</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--===========================================MODAL ADD ORDDER====================================-->
+    <div class="modal fade" id="show_schedule_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="header-modal">
+                            <h4>для консультации<br> оставьте свои данные</h4>
+                            <div class="raw">
+                                @using (Html.BeginForm("AddInfo", "Home"))
+                                {
+                                    @Html.HiddenFor(m => m.Id);
+                                    <div class="col-xs-12">
+                                        <input type="text" maxlength="60" name="Name" required="" placeholder="Ваше имя:" class="form-control form_input_name">
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <input type="number" maxlength="16" name="Number" required="" placeholder="Ваш номер телефона:" class="form-control form_input_phone">
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <input name="Description" maxlength="100" placeholder="Дополнительная информация:" class="form-control form_input_description">
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <button type="submit" id="apply_message">
+                                            <p>Отправить</p>
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===========================================MODAL ADD ORDDER====================================-->
+    <!--===========================================MODAL SHOW SCHEDULE====================================-->
+    <div class="modal fade" id="make_offer_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>Расписание</h3>
+                    <p><b>Понедельник</b> - c 08:00 до 18:00</p>
+                    <p><b>Вторник</b>  - c 08:00 до 18:00</p>
+                    <p><b>Среда</b>  - c 08:00 до 18:00</p>
+                    <p><b>Четверг</b>  - c 08:00 до 18:00</p>
+                    <p><b>Пятница</b>  - c 08:00 до 18:00</p>
+                    <p><b>Суббота</b> - Выходной</p>
+                    <p><b>Воскресенье</b> - Выходной</p>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===========================================MODAL SHOW SCHEDULE====================================-->
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+        <script async src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
+        <script async src="~/Scripts/smooth_transition.js"></script>
+        <script async src="~/Scripts/DynamicMap.js"></script>
+        <script async src="~/Scripts/Submit.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DocDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="List" Type="nvarchar" MaxLength="700" />
+        </EntityType>
+        <EntityType Name="MainContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstParagraph" Type="nvarchar" MaxLength="800" Nullable="false" />
+          <Property Name="SecondParagraph" Type="nvarchar" MaxLength="1300" />
+          <Property Name="ImgSrc" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="ServiceId" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Number" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <Association Name="FK_ON_SERVICES">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MainContent" Type="Self.MainContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MainContent">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DocDBModelStoreContainer">
+          <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainContent" EntityType="Self.MainContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ON_SERVICES" Association="Self.FK_ON_SERVICES">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="MainContent" EntitySet="MainContent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DocDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="List1" Type="String" MaxLength="700" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MainContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstParagraph" Type="String" MaxLength="800" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecondParagraph" Type="String" MaxLength="1300" FixedLength="false" Unicode="true" />
+          <Property Name="ImgSrc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_ON_SERVICES" FromRole="MainContent" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="MainContent" Relationship="Self.FK_ON_SERVICES" FromRole="Services" ToRole="MainContent" />
+        </EntityType>
+        <Association Name="FK_ON_SERVICES">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MainContent" Type="Self.MainContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MainContent">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DocDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="List" EntityType="Self.List" />
+          <EntitySet Name="MainContent" EntityType="Self.MainContent" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <AssociationSet Name="FK_ON_SERVICES" Association="Self.FK_ON_SERVICES">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="MainContent" EntitySet="MainContent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DocDBModelStoreContainer" CdmEntityContainer="DocDBEntities">
+          <EntitySetMapping Name="List">
+            <EntityTypeMapping TypeName="DocDBModel.List">
+              <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="List1" ColumnName="List" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainContent">
+            <EntityTypeMapping TypeName="DocDBModel.MainContent">
+              <MappingFragment StoreEntitySet="MainContent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstParagraph" ColumnName="FirstParagraph" />
+                <ScalarProperty Name="SecondParagraph" ColumnName="SecondParagraph" />
+                <ScalarProperty Name="ImgSrc" ColumnName="ImgSrc" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DocDBModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="DocDBModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

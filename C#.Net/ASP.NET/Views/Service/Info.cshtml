@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "~/Views/Home/MasterPage.cshtml";
+}
+
+
+<div class="discont-text text-center">
+    <h3>Лучшие предложения: </h3>
+</div>
+<div class="slider">
+  
+    <article id="left-paragraph">
+        <div class="about_company">
+            <div class="col-lg-5">
+                <img src="@ViewBag.Service.ImgSrc" alt="@ViewBag.Title" width="256">
+            </div>
+            <div class="col-lg-7">
+
+                <h4 class="Title_base">@ViewBag.Title</h4>
+
+                <p>@Html.Raw(ViewBag.Service.FirstParagraph)</p>
+            </div>
+            <br>
+               <p>@Html.Raw(ViewBag.Service.SecondParagraph)</p>
+            <br>
+            <h4 class="Option_info">Предварительно просим связаться с нами или оставить заявку.</h4>
+        </div>
+    </article>
+</div>
+

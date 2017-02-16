@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS [Products]
+
+GO
+DROP TABLE IF EXISTS [Groups]
+
+GO
+DROP TABLE IF EXISTS [Customers]
+
+GO
+DROP TABLE IF EXISTS [Orders]
+
+GO
