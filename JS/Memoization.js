@@ -26,5 +26,5 @@ Profile1: 626.739ms
 result:200000000
 0.012ms
 result:200000000
-63.055ms result:20000000 // it saves time if function calles with same arguments 2 or more times
+63.055ms result:20000000 // it saves time if the function is invoked 2 times or more with same arguments
 */
