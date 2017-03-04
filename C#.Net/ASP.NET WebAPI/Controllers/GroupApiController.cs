@@ -28,17 +28,28 @@ namespace ShopApi.Controllers
             }
         }
         [HttpPost]
-        public void Post([FromBody]Groups group)
+        public HttpResponseMessage Post([FromBody]Groups group)
         {
-            string PatternForSrc = @"\D{2,30}";
-            string PatternForName = @"\D{2,15}[.img|.jpg]";
-            if (Regex.IsMatch(group.Name,PatternForName, RegexOptions.IgnoreCase | RegexOptions.Compiled) &&
-                Regex.IsMatch(group.ImgSrc,PatternForSrc, RegexOptions.IgnoreCase | RegexOptions.Compiled) )
-                using (ShopContext db = new ShopContext())
-                {
-                    db.Groups.Add(group);
-                    db.SaveChanges();
-                }
+            try
+            {
+                string PatternForSrc = @"\D{2,30}";
+                string PatternForName = @"\D{2,15}[.img|.jpg]";
+                if (Regex.IsMatch(group.Name, PatternForName, RegexOptions.IgnoreCase | RegexOptions.Compiled) &&
+                    Regex.IsMatch(group.ImgSrc, PatternForSrc, RegexOptions.IgnoreCase | RegexOptions.Compiled))
+                    using (ShopContext db = new ShopContext())
+                    {
+                        db.Groups.Add(group);
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                else
+                    throw new Exception("Wrong input");
+                
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         [HttpDelete]
         public HttpResponseMessage Delete(int ?Id)
