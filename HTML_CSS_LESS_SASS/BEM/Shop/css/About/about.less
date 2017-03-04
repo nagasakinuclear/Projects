@@ -1,0 +1,179 @@
+.LinkMixin(@colorBefore,@colorAfter){
+	&:visited,&:focus,&:active,&:hover,&{
+		color: @colorBefore;
+	}
+	&:hover{
+		color: @colorAfter;
+	}
+}
+.content{
+	
+	&__side-bar-left{
+		display: block;
+		float: left;
+		width: 250px;
+		background-color: white;
+		border-radius: 6px;
+		border: 1px solid #e5e5e5;
+		margin-right: 20px;
+		margin-top: 20px;
+		padding: 10px 10px 20px 10px;
+		border-bottom: 3px solid #aaeafa;
+			&-contacts{
+				clear: left;
+				&-header{
+					font-size: 16px;
+					color: black !important;;
+					border-bottom: 1px solid #ddd;
+				}
+				&-phone{
+					&::before{
+						content: "\f095";
+						font-family: "FontAwesome";
+						color:#e36159;
+						padding-right: 4px;
+					}
+					padding-top: 8px;
+				}
+				&-owner{
+					padding-top: 11px 0px;
+					margin: 5px 0px;
+				}
+				&-name{
+					&::before{
+						content: "\f007";
+						font-family: "FontAwesome";
+						color:#e36159;
+						padding-right: 4px;
+					}
+					 
+				}
+				&-map{
+					width: 100%;
+					clear: right;
+					float: left;
+					font-size: 16px;
+					color: black !important;;
+					border-bottom: 1px solid #ddd;
+					padding: 2px;
+					margin-bottom: 10px;
+				}
+				&-mail{
+					&::before{
+						content: "\f003";
+						font-family: "FontAwesome";
+						color:#e36159;
+						padding-right: 5px;
+					}
+					font-size: 	15px;
+					margin-top: 8px;
+				}
+			}
+			
+			&-categories{
+				&-header{
+					font-size: 16px;
+					color: black !important;;
+				}		
+				&-element{
+					border-bottom: 1px solid #ddd;
+					padding: 5px 25px 5px 0;
+					&-last{
+						border: none;
+						margin-bottom: -15px;
+					}
+					&-a{
+						.LinkMixin(#777,#777);
+					}
+				}
+			}
+		}
+
+		&__info{
+			background-color: white;
+			border-radius: 5px;
+			margin-top: 20px;
+			float: right;
+			width: 76%;
+			border: 1px solid #e5e5e5;
+			border-bottom: 3px solid #aaeafa;
+				&-img{
+					 float: left;
+					 margin: 10px;
+				     line-height: 270px;
+					 position: relative;
+					 display: inline-block;
+					 overflow: hidden;
+					 width: 270px;
+					 height: 270px;
+					 text-align: center;
+					 vertical-align: middle;
+		             border: 1px solid #e5e5e5;
+		             margin-right: 25px;
+		         }
+		        &-title{
+		        	    font: 700 18px 'Bender',sans-serif;
+		        }
+		        &-price{
+		        	margin-top: 10px;
+		        	font-weight: 400 !important;
+		        	color: #e36159;
+		        }
+		        &-amount{
+		        	font-size: 16px;
+		        }
+		        &-delivery{
+	    			font-size: 15px;
+	    			margin-bottom: 15px;
+	    			&::before{
+						content: "\f0d1";
+						font-family: "FontAwesome";
+						color:black;
+						padding-right: 5px;
+					}
+	    		}
+	    		&-consult{
+	    			font-size: 15px;
+	    			margin-bottom: 15px;
+	    		}
+		        &-add{
+				    text-align: center;
+				    margin: 0 auto;
+				    font: 14px ;
+				    padding: 10px 50px;
+				    border:none;
+				    color: white;
+			           border-radius: 5px;
+				    background-color:#ea8b85;	
+				    -webkit-box-shadow: 0 2px rgba(0,0,0,0.3);
+			   		   -moz-box-shadow: 0 2px rgba(0,0,0,0.3);
+			    	box-shadow: 0 2px rgba(0,0,0,0.3);
+			    	margin-bottom: 5px;
+			    	&:hover{
+						background-color: black;
+			    	}
+	    		}
+	    		&-description{
+	    			clear: both;
+	    			margin: 20px;	
+	    			font-size: 16px;
+	    		}
+	    		&-pay{
+					border-top: 1px solid #e5e5e5;
+	    			margin: 20px;	
+	    			font-size: 16px;
+	    		}
+	    		&-deliver{
+	    			border-top: 1px solid #e5e5e5;
+	    			margin: 20px;	
+	    			font-size: 16px;
+	    		}
+	    		&-change{
+	    			padding-top: 20px; 
+					border-top: 1px solid #e5e5e5;
+	    			margin: 20px;	
+	    			font-size: 16px;
+	    			font-weight: 600;
+	    		}
+			}	
+		}

@@ -1,74 +1,44 @@
-CREATE TABLE [Products] (
-	Id integer NOT NULL,
-	Name nvarchar(50) NOT NULL,
-	Description varchar(200) NOT NULL,
-	Count integer NOT NULL,
-	_Group integer NOT NULL,
-	ImgSrc nvarchar(100) NOT NULL,
-	Price decimal NOT NULL,
-  CONSTRAINT [PK_PRODUCTS] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
+CREATE TABLE [dbo].[Customers] (
+    [Id] INT NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL, 
+    [Fname] NVARCHAR(50) NOT NULL, 
+    [PhoneNumber] INT NOT NULL, 
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+GO
+CREATE TABLE [dbo].[Groups] (
+    [Id]     INT           NOT NULL,
+    [Name]   NVARCHAR (50) NOT NULL,
+    [ImgSrc] NCHAR (40)    NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+GO
+CREATE TABLE [dbo].[Orders]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [Date] DATE NOT NULL, 
+    [ProductId] INT NOT NULL, 
+    [CustomerId] INT NOT NULL, 
+    CONSTRAINT fk_PerProduct FOREIGN KEY (ProductId)
+	REFERENCES Products(Id),
+	CONSTRAINT fk_PerCustomer FOREIGN KEY (CustomerId)
+	REFERENCES Customers(Id)
 
 )
 GO
-CREATE TABLE [Groups] (
-	Id integer NOT NULL,
-	Name nvarchar(50) NOT NULL,
-	ImgSrc nvarchar(50) NOT NULL,
-  CONSTRAINT [PK_GROUPS] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
+CREATE TABLE [dbo].[Products] (
+    [Id]          INT            NOT NULL,
+    [Name]        NVARCHAR (50)  NOT NULL,
+    [GroupId]     INT            NOT NULL,
+    [Price]       FLOAT (53)     NOT NULL,
+    [Count]       INT            NOT NULL,
+    [Description] NVARCHAR (900) NOT NULL,
+    [ImgSrc]      NCHAR (50)     NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT fk_PerGroup  FOREIGN KEY (GroupId) 
+	REFERENCES Groups(Id)
+);
 
-)
-GO
-CREATE TABLE [Customers] (
-	Id integer NOT NULL,
-	Name nvarchar(50) NOT NULL,
-	FName nvarchar(50) NOT NULL,
-	PhoneNumber integer NOT NULL,
-	Gender boolean NOT NULL,
-  CONSTRAINT [PK_CUSTOMERS] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
-)
-GO
-CREATE TABLE [Orders] (
-	Id integer NOT NULL,
-	CustomerId integer NOT NULL,
-	ProductId integer NOT NULL,
-	ProductCount integer NOT NULL,
-	Date date NOT NULL,
-	Summ decimal NOT NULL,
-  CONSTRAINT [PK_ORDERS] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
-)
-GO
-ALTER TABLE [Products] WITH CHECK ADD CONSTRAINT [Products_fk0] FOREIGN KEY ([Group]) REFERENCES [Groups]([Id])
-ON UPDATE CASCADE
-ON DELETE CASCADE
-GO
-ALTER TABLE [Products] CHECK CONSTRAINT [Products_fk0]
-GO
-
-
-
-ALTER TABLE [Orders] WITH CHECK ADD CONSTRAINT [Orders_fk0] FOREIGN KEY ([CustomerId]) REFERENCES [Customers]([Id])
-ON UPDATE CASCADE
-ON DELETE CASCADE
-GO
-ALTER TABLE [Orders] CHECK CONSTRAINT [Orders_fk0]
-GO
-ALTER TABLE [Orders] WITH CHECK ADD CONSTRAINT [Orders_fk1] FOREIGN KEY ([ProductId]) REFERENCES [Products]([Id])
-ON UPDATE CASCADE
-ON DELETE CASCADE
-GO
-ALTER TABLE [Orders] CHECK CONSTRAINT [Orders_fk1]
 GO

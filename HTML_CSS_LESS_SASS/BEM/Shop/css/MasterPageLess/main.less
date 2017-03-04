@@ -1,0 +1,42 @@
+.main{
+	&__phone-number{
+		background-color: @phoneCol;
+	}
+	&__phone-number-a{
+	 .mixin-href(black,#23527c);
+	 font-size: 15px;
+	}
+	&__phone-number-i{
+		float: right;
+		margin-top: 10px;
+	}
+	&__phone-number-h5{
+	float: right;
+	margin-left: 5px;
+	}
+	&__menu{
+		background-color: #F9F9F9;
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}
+	&__menu-list{
+		margin: 0 auto;
+	}
+	&__menu-list-elem{
+		margin-left: -13px;
+		padding: 20px;
+		color: black;
+		text-transform: uppercase;
+		font: bold 14px/17px 'Bender',sans-serif;
+		border: 2px solid #EEEEEE;
+		&:hover{
+			background-color: @bgcol;
+			color: white;
+		}
+	}
+	&__menu-list-elem-first{
+		margin-left: 15px;
+		background-color: @bgcol;
+		color: white;
+	}
+}
