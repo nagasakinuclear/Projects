@@ -16,7 +16,7 @@ namespace ShopApi.Controllers
         {
             using (ShopContext db = new ShopContext())
             {
-                return db.Groups.ToList() ?? null;
+                return db.Groups.ToList();
             }
         }
         [HttpGet]
@@ -24,27 +24,25 @@ namespace ShopApi.Controllers
         {
             using (ShopContext db = new ShopContext())
             {
-                return db.Groups.FirstOrDefault(x => x.Id == Id) ?? null;
+                return db.Groups.FirstOrDefault(x => x.Id == Id);
             }
         }
         [HttpPost]
         public HttpResponseMessage Post([FromBody]Groups group)
         {
+            //Regex checking in model
             try
             {
-                string PatternForSrc = @"\D{2,30}";
-                string PatternForName = @"\D{2,15}[.img|.jpg]";
-                if (Regex.IsMatch(group.Name, PatternForName, RegexOptions.IgnoreCase | RegexOptions.Compiled) &&
-                    Regex.IsMatch(group.ImgSrc, PatternForSrc, RegexOptions.IgnoreCase | RegexOptions.Compiled))
+                if (ModelState.IsValid)
+                {
                     using (ShopContext db = new ShopContext())
                     {
                         db.Groups.Add(group);
                         db.SaveChanges();
                         return Request.CreateResponse(HttpStatusCode.OK);
                     }
-                else
-                    throw new Exception("Wrong input");
-                
+                }
+                throw new Exception("Ошибка при вводе данных");
             }
             catch (Exception ex)
             {
@@ -74,5 +72,6 @@ namespace ShopApi.Controllers
                 }
             }
         }
+
     }
 }
