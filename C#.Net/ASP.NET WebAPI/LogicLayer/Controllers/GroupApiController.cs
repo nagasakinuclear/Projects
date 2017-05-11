@@ -6,41 +6,30 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
-
+using DataLayer.Access;
 namespace ShopApi.Controllers
 {
     public class GroupApiController : ApiController
     {
-        [HttpGet]
-        public IEnumerable<Groups> Get()
+
+        public IEnumerable<Group> GetGroups()
         {
-            using (ShopContext db = new ShopContext())
-            {
-                return db.Groups.ToList();
-            }
+            return AccessClass.Get_Groups();
         }
-        [HttpGet]
-        public Groups Get(int ?Id)
+
+        public Group GetGroup(int ?Id)
         {
-            using (ShopContext db = new ShopContext())
-            {
-                return db.Groups.FirstOrDefault(x => x.Id == Id);
-            }
+            return AccessClass.Get_Group(Id);
         }
-        [HttpPost]
-        public HttpResponseMessage Post([FromBody]Groups group)
+
+        public HttpResponseMessage PostAddGroup([FromBody]Groups group)
         {
             //Regex checking in model
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (ShopContext db = new ShopContext())
-                    {
-                        db.Groups.Add(group);
-                        db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK);
-                    }
+                    AccessClass.Add_Group(group);
                 }
                 throw new Exception("Ошибка при вводе данных");
             }
@@ -49,28 +38,10 @@ namespace ShopApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, ex);
             }
         }
-        [HttpDelete]
-        public HttpResponseMessage Delete(int ?Id)
+
+        public HttpResponseMessage DeleteGroup(int ?Id)
         {
-            using (ShopContext db = new ShopContext())
-            {
-                try
-                {
-                    var group = db.Groups.FirstOrDefault(x => x.Id == Id);
-                    if (group == null)
-                       throw new Exception("There is no such group");
-                    else
-                    {
-                        db.Groups.Remove(group);
-                        db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK);
-                    }
-                }
-                catch(Exception ex)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-                }
-            }
+            return AccessLayer.Delete_Group(Id);
         }
 
     }
