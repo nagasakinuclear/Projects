@@ -1,0 +1,26 @@
+﻿@using System.Web.Mvc
+@*Adding group categories to sidebar*@ 
+@helper SideBarHelper(IEnumerable<string> Groups, System.Web.Mvc.UrlHelper url)
+    {
+    int i = 0;
+    <div class="content__side-bar-left content__side-bar-left-categories">
+
+        <div class="content__side-bar-left-categories-header content__side-bar-left-categories-element">Категории</div>
+       @foreach(string Group in Groups.ToArray())
+        {
+           
+         if (i == Group.Length - 1)
+         {
+            <div class="content__side-bar-left-categories-element content__side-bar-left-categories-element-last">
+                <a class="content__side-bar-left-categories-element-a" href="@url.Action("shop_cart", "Catalog", new { GroupId = ++i})">@Group</a>
+            </div>
+         }
+           else
+           {
+            <div class="content__side-bar-left-categories-element">
+                <a class="content__side-bar-left-categories-element-a" href="@url.Action("shop_cart", "Catalog", new { GroupId = ++i})">@Group</a>
+            </div>
+           }
+       }
+    </div>
+}

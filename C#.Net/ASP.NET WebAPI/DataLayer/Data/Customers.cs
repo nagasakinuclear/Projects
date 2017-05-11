@@ -7,33 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShopApi.Models
+namespace DataLayer.Data
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
-    [Authorize(Roles = "Administrator")]
-    public partial class Groups
+    
+    public partial class Customers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Groups()
+        public Customers()
         {
-            this.Products = new HashSet<Products>();
+            this.Orders = new HashSet<Orders>();
         }
-        [HiddenInput(DisplayValue = false)]
+    
         public int Id { get; set; }
-        [Required]
-        [DisplayName("Имя")]
-        [RegularExpression(@"[A-Za-z]{2,40}", ErrorMessage = "Некорректное имя")]
         public string Name { get; set; }
-        [Required]
-        [DisplayName("Путь к картинке")]
-        [RegularExpression(@"[A-za-z-_0-9]{1,30}[.img|.jpg|.png]", ErrorMessage = "Некорректный путь")]
-        public string ImgSrc { get; set; }
+        public string Fname { get; set; }
+        public int PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }
