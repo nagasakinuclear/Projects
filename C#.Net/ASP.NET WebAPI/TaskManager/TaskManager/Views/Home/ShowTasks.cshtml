@@ -1,0 +1,107 @@
+﻿@using DataLayer.Mapping;
+@model IEnumerable<Tasks>
+<div id="modalUser" style="display:none">
+    <form id="submitUpdate">
+        <input class="UserName" value="Название">
+        <input class="TaskName" value="Описание">
+        <input type="submit" value="Отправить" />
+    </form>
+</div>
+<div id="Tasks">
+    <input type="search" id="Search" value="Поиск"/>
+    <button id="btnSearch">Найти</button>
+        <div id="TaskList">
+            @foreach (Tasks task in Model)
+            {
+            <input type="text" class="TaskId" value="Id : @task.TaskId">
+            <input type="text" class="UserName" value="Юзер : @task.User.Name">
+            <input type="text" class="TaskName" value="Название @task.Name">
+            <input type="text" class="TaskId" value="описание @task.Description">
+            <h4>Дата создания @task.LastModification.ToString()</h4>
+            <button class="SubChanges" name="@task.TaskId">Изменить</button>
+            <button class="Delete" name="@task.TaskId">Изменить</button>
+            }     
+        </div>
+</div>
+<div id="AddTask">
+    <form id="AddTaskForm">
+        <input id="Name" value="Название" type="text"/>
+        <input id="Description" value="Описание" type="text" />
+        <input value="Добавить" type="submit" />
+    </form>
+</div>
+
+    <script>
+    $(document).ready(function () {
+        $("#AddTaskForm").submit(addTask(event));
+        $(".SubChanges").click(UpdateTask(event));
+        $(".Delete").click(DeleteTask(event));
+    });
+
+        function Task(name, Description,time)
+        {
+            this.LastModification  = time;
+            this.Name = name;
+            this.Description = Description;
+        }
+
+        function Search(value)
+        {
+            //TO DO
+        }
+        function DeleteTask(event) {
+            let taskId = event.attr("name");
+            $.ajax({
+                url: '/api/TasksApi/' + taskId,
+                type: 'Delete',
+                success: function () {
+                    alert("Задание удалено!");
+                },
+                error: function () {
+                    alert("Повторите попытку");
+                }
+            });
+        }
+        function UpdateTask(event)
+        {
+            $("#submitUpdate").css("display", "block");
+            let taskId = event.attr("name");
+            $.ajax({
+                url: '/api/TasksApi/' + taskId,
+                type: 'Post',
+                data: JSON.stringify(Task),
+                contentType: "application/json",
+                success: function (data) {
+                    alert("Задание обновлено!");
+                },
+                error: function () {
+                    alert("Повторите попытку");
+                }
+            });
+            $("#submitUpdate").css("display", "none");
+        }
+        
+        function addTask(event) {
+            let name = $("Name").val();
+            let Description = $("Description").val();
+            let Task = new Task(name, Description,@DateTime.Now);
+            if (name && Description)
+            {
+                $.ajax({
+                    url: '/api/TasksApi',
+                    type: 'POST',
+                    data: JSON.stringify(Task),
+                    contentType: "application/json",
+                    success: function (data) {
+                        alert("Задание добавлено!");
+                    },
+                    error: function () {
+                        alert("Повторите попытку ввода");
+                    }
+                });
+            }
+            else {
+                event.preventDefault();
+            }
+        }
+    </script>
